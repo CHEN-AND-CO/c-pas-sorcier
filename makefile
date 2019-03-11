@@ -18,7 +18,7 @@ obj/%.o: %.c
 	gcc -c $< -I. -o $@ $(CFLAGS)
 
 clean:
-	rm *.o *.out *.gch -f
+	rm obj/*.o *.out *.gch -f
 
 clear:
-	rm *.o *.gch -f
+	rm obj/*.o *.gch -f
