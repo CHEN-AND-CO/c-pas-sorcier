@@ -6,7 +6,7 @@ void visualisationC(float puissance_f)
         fprintf(stderr, "File %s is locked !", CONSIGNE_PATH);
    }else{
         FILE *lock = fopen(LOCK_PATH, "w"); // Crée le verrou d'accès
-        FILE *sum_file_pointer = fopen(CONSIGNE_PATH, "w+"); // Ouvre le fichier de consigne
+        FILE *sum_file_pointer = fopen(CONSIGNE_PATH, "r+"); // Ouvre le fichier de consigne
 
         if(!sum_file_pointer){ // Vérifie si on a réussi à ouvrir le fichier
            fprintf(stderr, "Failed to open %s !", CONSIGNE_PATH);

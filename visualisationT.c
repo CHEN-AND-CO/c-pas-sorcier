@@ -14,7 +14,7 @@ void visualisationT(temp_t t)
         printf("[ERROR] File %s locked\n", DATA_PATH);
     } else {
         FILE *lock = fopen(LOCK_PATH, "w"); // Crée le verrou d'accès
-        FILE *fTemp = fopen(DATA_PATH, "a+");
+        FILE *fTemp = fopen(DATA_PATH, "r+");
 
         if ( !fTemp ) {
             printf("[ERROR] Failed to open file 'data.txt'\n");
