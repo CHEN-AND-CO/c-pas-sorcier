@@ -11,9 +11,10 @@ void visualisationT(temp_t t)
     //Checking for lockfile
     if ( access("interface/.verrouData", F_OK) != -1 )
     {
-        printf("[ERROR] File 'data.txt' locked\n");
+        printf("[ERROR] File %s locked\n", DATA_PATH);
     } else {
-        FILE *fTemp = fopen("interface/data.txt", "a+");
+        FILE *lock = fopen(LOCK_PATH, "w"); // Crée le verrou d'accès
+        FILE *fTemp = fopen(DATA_PATH, "a+");
 
         if ( !fTemp ) {
             printf("[ERROR] Failed to open file 'data.txt'\n");
@@ -24,5 +25,8 @@ void visualisationT(temp_t t)
         fprintf(fTemp, "%.1f\n%.1f\n", t.exterieure, t.interieure);
 
         fclose(fTemp);
+        fclose(lock); // Suppression pointeur de fichier
+
+        remove(LOCK_PATH); // On retire le verrou
     }
 }
