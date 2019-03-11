@@ -5,9 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define LOCK_PATH "interface/.verrouData"
-#define DATA_PATH "interface/data.txt"
-#define CONSIGNE_PATH "interface/consigne.txt"
+#define LOCK_PATH ".verrouData"
+#define DATA_PATH "data.txt"
+#define CONSIGNE_PATH "consigne.txt"
 #define MAX_BUFFER_SIZE 4096
 
 typedef struct {
