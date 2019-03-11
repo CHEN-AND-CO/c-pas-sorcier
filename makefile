@@ -12,13 +12,13 @@ all: $(PROJET)
 remake: clean $(PROJET)
 
 $(PROJET) : $(OBJ)
-	gcc obj/* $(LDFLAGS) -o $@
+	gcc *.o $(LDFLAGS) -o $@
 
-obj/%.o: src/%.c
+obj/%.o: %.c
 	gcc -c $< -Iinclude -o $@ $(CFLAGS)
 
 clean:
-	rm obj/*.o *.out *.gch -f
+	rm *.o *.out *.gch -f
 
 clear:
-rm obj/*.o *.gch -f
+rm *.o *.gch -f
