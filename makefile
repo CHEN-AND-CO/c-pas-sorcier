@@ -21,4 +21,4 @@ clean:
 	rm *.o *.out *.gch -f
 
 clear:
-rm *.o *.gch -f
+	rm *.o *.gch -f
