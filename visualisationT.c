@@ -6,15 +6,20 @@
 */
 void visualisationT(temp_t t)
 {
-    // char *line[MAX_BUFER_SIZE] = {0};
+    FILE *fTemp = NULL;
 
     //Checking for lockfile
-    if ( access("interface/.verrouData", F_OK) != -1 )
+    if (access(DATA_LOCK_PATH, F_OK) != -1)
     {
         printf("[ERROR] File %s locked\n", DATA_PATH);
     } else {
-        FILE *lock = fopen(LOCK_PATH, "w"); // Crée le verrou d'accès
-        FILE *fTemp = fopen(DATA_PATH, "r+");
+        FILE *lock = fopen(DATA_LOCK_PATH, "w"); // Crée le verrou d'accès
+        
+        if ( access(DATA_PATH, F_OK) == -1) {
+            fTemp = fopen(DATA_PATH, "w+");
+        } else {
+            fTemp = fopen(DATA_PATH, "r+");
+        }
 
         if ( !fTemp ) {
             printf("[ERROR] Failed to open file 'data.txt'\n");
@@ -27,6 +32,6 @@ void visualisationT(temp_t t)
         fclose(fTemp);
         fclose(lock); // Suppression pointeur de fichier
 
-        remove(LOCK_PATH); // On retire le verrou
+        remove(DATA_LOCK_PATH); // On retire le verrou
     }
 }
