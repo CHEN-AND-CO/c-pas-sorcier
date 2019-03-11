@@ -2,9 +2,10 @@
 
 void visualisationC(float puissance_f)
 {
-   if(access(".verrouData", F_OK) != -1){ // Vérifie si le fichier est disponible      
+   if(access(LOCK_PATH, F_OK) != -1){ // Vérifie si le fichier est disponible      
         fprintf(stderr, "File %s is locked !", CONSIGNE_PATH);
    }else{
+        FILE *lock = fopen(LOCK_PATH, "w");
         FILE *sum_file_pointer = fopen(CONSIGNE_PATH, "w+"); // Ouvre le fichier de consigne
 
         if(!sum_file_pointer){ // Vérifie si on a réussi à ouvrir le fichier
@@ -18,5 +19,10 @@ void visualisationC(float puissance_f)
         if(fputs(str_pui, sum_file_pointer)==-1){ //Si l'écriture rate
             fprintf(stderr, "Failed to write on %s !", CONSIGNE_PATH);    
         }
+
+        fclose(sum_file_pointer);
+        fclose(lock);
+
+        remove(LOCK_PATH);
    }
 }

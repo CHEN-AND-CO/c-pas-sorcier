@@ -12,7 +12,7 @@ all: $(PROJET)
 remake: clean $(PROJET)
 
 $(PROJET) : $(OBJ)
-	gcc obj/* $(LDFLAGS) -o $@
+	gcc obj/*.o $(LDFLAGS) -o $@
 
 obj/%.o: %.c
 	gcc -c $< -I. -o $@ $(CFLAGS)
