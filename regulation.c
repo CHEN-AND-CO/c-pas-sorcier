@@ -13,7 +13,7 @@ float regulation(int mode, float target, float *tab_temp, int tab_len){
 	
 	switch(mode){
 		case 1: // ToR
-			return (tab_temp[tab_len-1] < target)? TOR_FULL_POWER:TOR_LOW_POWER;
+			return (tab_temp[tab_len-1] < target) ? TOR_FULL_POWER : TOR_LOW_POWER;
 		break;
 		case 2: // PID
 			p = PID_KP*(target-tab_temp[tab_len-1]); // Kp*(erreur)
