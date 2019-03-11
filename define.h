@@ -1,11 +1,13 @@
 #ifndef DEFINE_H
 #define DEFINE_H
 
-typedef struct
-{
-    float exterieure;
-    float interieure;
-} temp_t;
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+typedef struct {
+	float interieure;
+	float exterieure;
+}temp_t;
 
 #endif /* DEFINE_H */

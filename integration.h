@@ -1,5 +1,5 @@
- #ifndef INTEGRATION_H
- #define INTEGRATION_H
+#ifndef INTEGRATION_H
+#define INTEGRATION_H
 
 #include <stdio.h>
 #include <stdlib.h>
