@@ -15,7 +15,7 @@ $(PROJET) : $(OBJ)
 	gcc *.o $(LDFLAGS) -o $@
 
 obj/%.o: %.c
-	gcc -c $< -Iinclude -o $@ $(CFLAGS)
+	gcc -c $< -I. -o $@ $(CFLAGS)
 
 clean:
 	rm *.o *.out *.gch -f
