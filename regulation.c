@@ -9,14 +9,16 @@ float regulationTest(int regul,float csgn,float* tabT, int nT){
 }
 
 float regulation(int mode, float target, float *tab_temp, int tab_len){
+	float p,i,d;
+	
 	switch(mode){
 		case 1: // ToR
 			return (tab_temp[tab_len-1] < target)? TOR_FULL_POWER:TOR_LOW_POWER;
 		break;
 		case 2: // PID
-			float p = PID_KP*(target-tab_temp[tab_len-1]); // Kp*(erreur)
-			float i = PID_KI*regulation_error_sum(target, tab_temp, tab_len); // Ki*(somme erreurs)
-			float d = PID_KD*(tab_temp[tab_len-1]+tab_temp[tab_len-2]); // Kd*(erreur-erreur_precedente)
+			p = PID_KP*(target-tab_temp[tab_len-1]); // Kp*(erreur)
+			i = PID_KI*regulation_error_sum(target, tab_temp, tab_len); // Ki*(somme erreurs)
+			d = PID_KD*(tab_temp[tab_len-1]+tab_temp[tab_len-2]); // Kd*(erreur-erreur_precedente)
 
 			return p+i+d;
 		break;
