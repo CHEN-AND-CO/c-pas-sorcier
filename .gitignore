@@ -3,3 +3,4 @@ c-pas-sorcier
 obj/*
 *.o
 *.ghc
+simulateur/obj/*
