@@ -2,6 +2,7 @@
 #define VISUALISATIONC_H
 
 #include "define.h"
+#include <stdlib.h>
 
 void visualisationC(float puissance_f);
 
