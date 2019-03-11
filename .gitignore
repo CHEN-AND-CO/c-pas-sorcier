@@ -1,6 +1,8 @@
 *.code-workspace
 c-pas-sorcier
+simulateur/obj/*
 obj/*
 *.o
 *.ghc
-simulateur/obj/*
+*.sh
+*.zip
