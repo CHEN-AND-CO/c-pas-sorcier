@@ -3,12 +3,12 @@
 void visualisationC(float puissance_f)
 {
    if(access(CONSIGNE_LOCK_PATH, F_OK) != -1){ // Vérifie si le fichier est disponible      
-         fprintf(stderr, "File %s is locked !", CONSIGNE_PATH);
+         fprintf(stderr, "File %s doesn\'t exist !", CONSIGNE_PATH);
    } else {
          FILE *lock = fopen(CONSIGNE_LOCK_PATH, "w"); // Crée le verrou d'accès
          FILE *sum_file_pointer = NULL;
 
-         if (access(CONSIGNE_PATH, F_OK) != -1) {
+         if (access(CONSIGNE_PATH, F_OK) == -1) {
             sum_file_pointer = fopen(CONSIGNE_PATH, "r+"); // Ouvre le fichier de consigne
          } else {
             sum_file_pointer = fopen(CONSIGNE_PATH, "w+"); // Crée le fichier de consigne
