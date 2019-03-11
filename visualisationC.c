@@ -9,9 +9,9 @@ void visualisationC(float puissance_f)
          FILE *sum_file_pointer = NULL;
 
          if (access(CONSIGNE_PATH, F_OK) == -1) {
-            sum_file_pointer = fopen(CONSIGNE_PATH, "r+"); // Ouvre le fichier de consigne
-         } else {
             sum_file_pointer = fopen(CONSIGNE_PATH, "w+"); // Crée le fichier de consigne
+         } else {
+            sum_file_pointer = fopen(CONSIGNE_PATH, "r+"); // Ouvre le fichier de consigne
          }
 
          if(!sum_file_pointer){ // Vérifie si on a réussi à ouvrir le fichier
