@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define DATA_PATH "interface/data.txt"
+#define MAX_BUFFER_SIZE 4096
+
 typedef struct {
 	float interieure;
 	float exterieure;
