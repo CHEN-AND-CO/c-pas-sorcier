@@ -2,20 +2,21 @@
 
 void visualisationC(float puissance_f)
 {
-   if(access(".verrouData", F_OK) != -1){
-       FILE *sum_file_pointer = fopen(DATA_PATH, "a+");
+   if(access(".verrouData", F_OK) != -1){        
+        fprintf(stderr, "File %s is locked !", CONSIGNE_PATH);
+   }else{
+        FILE *sum_file_pointer = fopen(CONSIGNE_PATH, "w+");
 
-       if(!sum_file_pointer){
-           fprintf(stderr, "Failed to open %s !", DATA_PATH);
+        if(!sum_file_pointer){
+           fprintf(stderr, "Failed to open %s !", CONSIGNE_PATH);
 
            return;
-       }
+        }
 
-        char buffer[MAX_BUFFER_SIZE] = {0};
-        float puis = atof(fgets(buffer, MAX_BUFFER_SIZE, sum_file_pointer));
-        
-        
-   }else{
-       fprintf(stderr, "File %s doesn\'t exist !", DATA_PATH);
+        char *str_pui = malloc(MAX_BUFFER_SIZE*sizeof(char *));
+        snprintf(str_pui, MAX_BUFFER_SIZE, "%f", puissance_f);
+        if(fputs(str_pui, sum_file_pointer)==-1){
+            fprintf(stderr, "Failed to write on %s !", CONSIGNE_PATH);    
+        }
    }
 }

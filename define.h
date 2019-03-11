@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #define DATA_PATH "interface/data.txt"
+#define CONSIGNE_PATH "interface/consigne.txt"
 #define MAX_BUFFER_SIZE 4096
 
 typedef struct {
