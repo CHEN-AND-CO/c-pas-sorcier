@@ -9,7 +9,7 @@ float consigne(float csgn)
          FILE *sum_file_pointer = NULL;
          FILE *lock = fopen(CONSIGNE_LOCK_PATH, "w"); // Crée le verrou d'accès
 
-         if ( access(CONSIGNE_PATH, F_OK) == -1 ) {
+         if ( access(CONSIGNE_PATH, F_OK) != -1 ) {
             sum_file_pointer = fopen(CONSIGNE_PATH, "r+"); // Ouvre le fichier de consigne
          } else {
             sum_file_pointer = fopen(CONSIGNE_PATH, "w+"); // Crée le fichier de consigne
