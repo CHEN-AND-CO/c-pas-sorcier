@@ -1,8 +1,8 @@
 #ifndef VISUALISATIONT_H
 #define VISUALISATIONT_H
 
-#include "define.h" 
+#include "define.h"
 
-void visualisationT(temp_t myTemp);
+void visualisationT(temp_t t);
 
 #endif /* VISUALISATIONT_H */
