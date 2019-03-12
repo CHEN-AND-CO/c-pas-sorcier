@@ -21,9 +21,9 @@ void visualisationC(float puissance_f)
 
          char *str_pui = malloc(MAX_BUFFER_SIZE*sizeof(char *)); //Chaine pour consigne de puissance
          if(puissance_f > 0){
-            str_pui = "true";
+            str_pui = "true\n";
          }else{
-            str_pui = "false";
+            str_pui = "false\n";
          }
 
          char tmp[MAX_BUFFER_SIZE] = {0};
