@@ -6,3 +6,7 @@ obj/*
 *.ghc
 *.sh
 *.zip
+.~lock.trace.txt#
+consigne.txt
+data.txt
+trace.txt
