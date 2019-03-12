@@ -3,8 +3,9 @@
 
 float regulationTest(int regul, float csgn, float *tabT, int nT) {
 	float cmd=100.0;
-	
-	for(size_t i = 1; i < nT; i++)
+	int i;
+
+	for( i = 1; i < nT; i++)
 	{
 		//cmd = regulation(regul, csgn, tabT[i], tabT[i-1]);
 		cmd = regulation_pid_de_ses_morts(regul, csgn, tabT[i-1], tabT[i]);
