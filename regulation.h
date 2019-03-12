@@ -16,6 +16,6 @@ float regulation(int mode, float target, float temp, float prev_temp);
 
 float regulation_error_sum(float target, float current);
 
-//float regulation_pid(float target, float temp_start, float temp_end, int t, int to);
+float regulation_pid_de_ses_morts(int mode, float target, float temp_prev, float temp_now);
 
 #endif /* REGULATION_H */
