@@ -6,8 +6,7 @@ float regulationTest(int regul, float csgn, float *tabT, int nT) {
 	
 	for(size_t i = 1; i < nT; i++)
 	{
-		//cmd = regulation(regul, csgn, tabT[i], tabT[i-1]);
-		cmd = regulation_pid(csgn,tabT[0], tabT[i], tabT[i+1], 10);
+		cmd = regulation(regul, csgn, tabT[i], tabT[i-1]);
 	}
 
 	return cmd;
@@ -24,7 +23,7 @@ float regulation(int mode, float target, float temp, float prev_temp) {
 		case 2: // PID
 			p = PID_KP * (target - temp); // Kp*(erreur)
 			i = PID_KI * regulation_error_sum(target, temp); // Ki*(somme erreurs)
-			d = PID_KD * (prev_temp - temp) * 10; // Kd*(erreur-erreur_precedente)
+			d = PID_KD * (prev_temp - temp); // Kd*(erreur-erreur_precedente)
 			pid = p+i+d;
 
 			if (pid < 0) {
@@ -52,21 +51,4 @@ float regulation_error_sum(float target, float current) {
 	i += (target - current);
 
 	return i;
-}
- 
-float regulation_pid(float target, float temp_start, float temp_end, int t, int to){
-	float p,i,d, pid, erreur_start, erreur_end;
-	erreur_start = target-temp_start;
-	erreur_end = target-temp_end;
-
-	p = PID_KP*(erreur_end-t/10);
-	i = PID_KI*((erreur_end-erreur_start)*(to)/2);
-	d = PID_KD*((erreur_end-erreur_start)*to/2+(to*erreur_end));
-
-	pid = p+i+d;
-
-	if(pid<0) pid = 0;
-	if(pid>100) pid=100;
-
-	return pid;
 }
