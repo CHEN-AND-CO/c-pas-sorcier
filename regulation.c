@@ -19,7 +19,7 @@ float regulation(int mode, float target, float *tab_temp, int tab_len){
 		case 2: // PID
 			p = PID_KP*(target-tab_temp[tab_len-1]); // Kp*(erreur)
 			i = PID_KI*regulation_error_sum(target, tab_temp[tab_len-1]); // Ki*(somme erreurs)
-			d = PID_KD*(tab_temp[tab_len-1]+tab_temp[tab_len-2]); // Kd*(erreur-erreur_precedente)
+			d = PID_KD*(tab_temp[tab_len-2]-tab_temp[tab_len-1]); // Kd*(erreur-erreur_precedente)
 			pid = p+i+d;
 
 			if (pid < 0) {
