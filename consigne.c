@@ -35,3 +35,48 @@ float consigne(float csgn)
    
       return csgn;
 }
+
+temp_t temperatures(temp_t temps)
+{
+      if(access(DATA_LOCK_PATH, F_OK) != -1){ // Vérifie si le fichier est disponible      
+            fprintf(stderr, "File %s is locked !", DATA_PATH);
+      } else {
+
+         FILE *sum_file_pointer = NULL;
+         FILE *lock = fopen(CONSIGNE_LOCK_PATH, "w"); // Crée le verrou d'accès
+
+         if ( access(DATA_PATH, F_OK) != -1 ) {
+            sum_file_pointer = fopen(DATA_PATH, "r+"); // Ouvre le fichier de consigne
+         } else {
+            sum_file_pointer = fopen(DATA_PATH, "w+"); // Crée le fichier de consigne
+         }
+
+         if(!sum_file_pointer){ // Vérifie si on a réussi à ouvrir le fichier
+            fprintf(stderr, "Failed to open %s !", DATA_PATH);
+
+            fclose(lock); // Suppression pointeur de fichier
+
+            remove(DATA_LOCK_PATH); // On retire le verrou
+
+            return temps;
+         }
+
+         char str_val[MAX_BUFFER_SIZE] = {0}; //Chaine pour lecture
+         if(!fgets(str_val, MAX_BUFFER_SIZE, sum_file_pointer)){ //Si la lecture rate
+               fprintf(stderr, "Failed to read on %s !", DATA_PATH);    
+         }
+         temps.exterieure = atof(str_val);
+
+		 if(!fgets(str_val, MAX_BUFFER_SIZE, sum_file_pointer)){ //Si la lecture rate
+               fprintf(stderr, "Failed to read on %s !", DATA_PATH);    
+         }
+         temps.interieure = atof(str_val);
+
+         fclose(sum_file_pointer); // Suppression pointeur de fichier
+         fclose(lock); // Suppression pointeur de fichier
+
+         remove(DATA_LOCK_PATH); // On retire le verrou
+      }
+   
+      return temps;
+}

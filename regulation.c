@@ -20,7 +20,7 @@ float regulation(int mode, float target, float *tab_temp, int tab_len){
 			i = PID_KI*regulation_error_sum(target, tab_temp, tab_len); // Ki*(somme erreurs)
 			d = PID_KD*(tab_temp[tab_len-1]+tab_temp[tab_len-2]); // Kd*(erreur-erreur_precedente)
 
-			return 100*(p+i+d)/127;
+			return p+i+d;
 		break;
 		default:
 			fprintf(stderr, "Error : mode %d is invalid !", mode);
