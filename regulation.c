@@ -1,15 +1,14 @@
 #include "regulation.h"
 	
 
-float regulationTest(int regul,float csgn,float *tabT, int nT) {
+float regulationTest(int regul, float csgn, float *tabT, int nT) {
 	float cmd=100.0;
 	
-
 	for(size_t i = 0; i < nT; i++)
 	{
 		cmd = regulation(regul, csgn, tabT[i], tabT[i-1]);
+		//cmd = regulation_pid(csgn,tabT[0], tabT[nT-1], 10, nT*10);
 	}
-	//cmd = regulation_pid(csgn,tabT[0], tabT[nT-1], 10, nT*10);
 
 	return cmd;
 }
@@ -17,10 +16,11 @@ float regulationTest(int regul,float csgn,float *tabT, int nT) {
 float regulation(int mode, float target, float temp, float prev_temp) {
 	float p,i,d, pid;	
 
-	switch(mode){
+	switch(mode) {
 		case 1: // ToR
 			return (temp < target) ? TOR_FULL_POWER : TOR_LOW_POWER;
 		break;
+
 		case 2: // PID
 			p = PID_KP * (target - temp); // Kp*(erreur)
 			i = PID_KI * regulation_error_sum(target, temp) * 10; // Ki*(somme erreurs)
@@ -37,6 +37,7 @@ float regulation(int mode, float target, float temp, float prev_temp) {
 
 			return pid;
 		break;
+
 		default:
 			fprintf(stderr, "Error : mode %d is invalid !", mode);
 
