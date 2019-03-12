@@ -24,10 +24,10 @@ float regulation(int mode, float target, float *tab_temp, int tab_len, FILE *fLo
 
 			if (pid < 0) {
 				pid = 0;
-				// regulation_error_sum(target, -tab_temp[tab_len-1]); // Substract error to mitigate the impact of saturated errors in the Integrative factor
+				regulation_error_sum(target, -tab_temp[tab_len-1]); // Substract error to mitigate the impact of saturated errors in the Integrative factor
 			} else if (pid > 100) {
 				pid = 100;
-				// regulation_error_sum(target, -tab_temp[tab_len-1]); // Substract error to mitigate the impact of saturated errors in the Integrative factor
+				regulation_error_sum(target, -tab_temp[tab_len-1]); // Substract error to mitigate the impact of saturated errors in the Integrative factor
 			}
 
 			logPID(fLog, target, tab_temp[tab_len-1], p, i, d, pid);
