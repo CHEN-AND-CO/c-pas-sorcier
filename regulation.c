@@ -63,8 +63,9 @@ FILE *initLogger() {
 }
 
 void logPID(FILE*fLog, float setpoint, float current, float p, float i, float d, float output) {
-	fprintf(fLog, "%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\n", setpoint, current, p, i, d, output);
+	fprintf(fLog, "%.4f,%.4f,%.4f,%.4f,%.4f,%.4f\n", setpoint, current, p, i, d, output);
 	printf("%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\n", setpoint, current, p, i, d, output);
+	fflush(fLog);
 }
 
 void stopLogger(FILE *fLog) {
