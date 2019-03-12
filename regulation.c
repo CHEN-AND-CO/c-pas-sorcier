@@ -35,6 +35,7 @@ float regulation(int mode, float target, float temp, float prev_temp) {
 				pid = 100;
 				// regulation_error_sum(-target, -temp); // Substract error to mitigate the impact of saturated errors in the Integrative factor
 			}
+			printf("T:%.4f\tC:%.4f\tP:%.4f\tI:%.4f\tD:%.4f\tOut:%.4f\n\n", target, temp, p, i, d, pid);
 
 			return pid;
 		break;
