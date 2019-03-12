@@ -18,7 +18,7 @@ void integrationTest(int regul,temp_t tInit,int nIterations){
         tab_temp = realloc(tab_temp, ++tab_len*sizeof(float *));
         tab_temp[tab_len-1]=temperature.interieure;
         
-        puissance = regulation_pid_de_ses_morts(regul, csgn,tab_temp[i-1], tab_temp[i]);
+        puissance = regulation(regul, csgn,tab_temp[i-1], tab_temp[i]);
         visualisationC(puissance);
         temperature=simCalc(puissance,monSimulateur_ps); // simulation de l'environnement
     }while(i++<nIterations);

@@ -24,8 +24,8 @@ float regulation(int mode, float target, float temp, float prev_temp) {
 
 		case 2: // PID
 			p = PID_KP * (target - temp); // Kp*(erreur)
-			i = PID_KI * regulation_error_sum(target, temp) * 10; // Ki*(somme erreurs)
-			d = PID_KD * (prev_temp - temp) / 10; // Kd*(erreur-erreur_precedente)
+			i = PID_KI * regulation_error_sum(target, temp) * 5; // Ki*(somme erreurs)
+			d = PID_KD * (prev_temp - temp) / 100; // Kd*(erreur-erreur_precedente)
 			pid = p+i+d;
 
 			if (pid < 0) {
@@ -74,8 +74,6 @@ float regulation_pid_de_ses_morts(int mode, float target, float temp_prev, float
 			integ += (dt*err+(dt*(errp-err))/2);
 			i = PID_KI*integ;
 			d = PID_KD*(err-errp)/dt;
-
-			printf("P:%f\tI:%f\tD:%f\n",p,i,d);
 
 			pid = p+i+d;
 
