@@ -1,5 +1,6 @@
 #include "regulation.h"
 	
+
 float regulationTest(int regul,float csgn,float* tabT, int nT){
 	float cmd=100.0;
 	
@@ -17,12 +18,17 @@ float regulation(int mode, float target, float *tab_temp, int tab_len){
 		break;
 		case 2: // PID
 			p = PID_KP*(target-tab_temp[tab_len-1]); // Kp*(erreur)
-			i = PID_KI*regulation_error_sum(target, tab_temp, tab_len); // Ki*(somme erreurs)
+			i = PID_KI*regulation_error_sum(target, tab_temp[tab_len-1]); // Ki*(somme erreurs)
 			d = PID_KD*(tab_temp[tab_len-1]+tab_temp[tab_len-2]); // Kd*(erreur-erreur_precedente)
 			pid = p+i+d;
 
-			if (pid < 0) pid = 0;
-			if (pid > 100) pid = 100;
+			if (pid < 0) {
+				pid = 0;
+				regulation_error_sum(target, -tab_temp[tab_len - 1]); // Substract error to mitigate the impact of saturated errors in the Integrative factor
+			} else if (pid > 100) {
+				pid = 100;
+				regulation_error_sum(target, -tab_temp[tab_len - 1]); // Substract error to mitigate the impact of saturated errors in the Integrative factor
+			}
 
 			return pid;
 		break;
@@ -34,12 +40,10 @@ float regulation(int mode, float target, float *tab_temp, int tab_len){
 	}
 }
 
-float regulation_error_sum(float target, float *tab_temp, int tab_len){
-	float error = 0;
+float regulation_error_sum(float target, float current) {
+	static float i = 0;
 
-	while(tab_len>0){
-		error += (target-tab_temp[--tab_len]);
-	}
+	i += (target - current);
 
-	return error;
+	return i;
 }

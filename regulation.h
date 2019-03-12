@@ -14,6 +14,6 @@ float regulationTest(int regul,float csgn,float* tabT, int nT);
 
 float regulation(int mode, float target, float *tab_temp, int tab_len);
 
-float regulation_error_sum(float target, float *tab_temp, int tab_len);
+float regulation_error_sum(float target, float current);
 
 #endif /* REGULATION_H */
