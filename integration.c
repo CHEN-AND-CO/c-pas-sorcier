@@ -22,6 +22,6 @@ void integrationTest(int regul,temp_t tInit,int nIterations){
 		visualisationC(puissance);
 		visualisationT(temperature);
 
-        usleep(50000);
+        // usleep(50000);
 	}
 }
