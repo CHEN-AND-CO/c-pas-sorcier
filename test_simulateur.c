@@ -44,7 +44,7 @@ int main(){
 		visualisationC(puissance);
 		visualisationT(temperature);
 
-		usleep(100000);
+		usleep(50000);
 	}
 
 	simDestruct(monSimulateur_ps); // destruction de simulateur
