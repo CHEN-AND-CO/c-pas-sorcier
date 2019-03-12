@@ -49,15 +49,15 @@ float regulation_error_sum(float target, float current) {
 
 	return i;
 }
- /*
+ 
 float regulation_pid(float target, float temp_start, float temp_end, int t, int to){
 	float p,i,d, pid, erreur_start, erreur_end;
 	erreur_start = target-temp_start;
 	erreur_end = target - temp_end;
 
 	p = PID_KP*(erreur_end-t/10);
-	i = PID_KI*((erreur_end-erreur_start)/to);
-	d = PID_KD*(erreur*t-(t*t)/20);
+	i = PID_KI*((erreur_end-erreur_start)*(to)/2);
+	d = PID_KD*((erreur_end-erreur_start)*to/2+(to*erreur_end));
 
 	pid = p+i+d;
 
@@ -65,4 +65,4 @@ float regulation_pid(float target, float temp_start, float temp_end, int t, int 
 	if(pid>100) pid=100;
 
 	return pid;
-}*/
+}
