@@ -19,8 +19,16 @@ int main(){
 
     tab_temp[0] = temperature.interieure;
 
+	///////////////////////////////////////////////////
+	//   REMOVE THIS
+	FILE *fLog = initLogger();
+	//////////////////////////
+
+
+
     csgn = consigne(0.0);
-    puissance = regulation(2, csgn, tab_temp, tab_len);
+    puissance = regulation(2, csgn, tab_temp, tab_len, fLog);
+	/////////////////////////////////////////////////////////
        
 	
 	for(i=0;1;i++){
@@ -29,7 +37,9 @@ int main(){
 		tab_temp = realloc(tab_temp, ++tab_len*sizeof(float *));
         tab_temp[tab_len-1]=temperature.interieure;
         csgn = consigne(0.0);
-        puissance = regulation(2, csgn, tab_temp, tab_len);
+
+        puissance = regulation(2, csgn, tab_temp, tab_len, fLog);
+		/////////////////////////////////////////////////////////
         
 		visualisationC(puissance);
 		visualisationT(temperature);
@@ -38,6 +48,8 @@ int main(){
 	}
 
 	simDestruct(monSimulateur_ps); // destruction de simulateur
-	
+
+	stopLogger(fLog);
+	/////////////////
 	return EXIT_SUCCESS;
 }
