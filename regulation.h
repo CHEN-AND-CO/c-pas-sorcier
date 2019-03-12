@@ -16,4 +16,6 @@ float regulation(int mode, float target, float *tab_temp, int tab_len);
 
 float regulation_error_sum(float target, float current);
 
+//float regulation_pid(float target, float temp_start, float temp_end, int t, int to);
+
 #endif /* REGULATION_H */
