@@ -26,7 +26,7 @@ int main(){
 	for(i=0;1;i++){
 		temperature=simCalc(puissance,monSimulateur_ps); // simulation de l'environnement
 		
-		tab_temp = realloc(tab_temp, ++tab_len);
+		tab_temp = realloc(tab_temp, ++tab_len*sizeof(float *));
         tab_temp[tab_len-1]=temperature.interieure;
         csgn = consigne(0.0);
         puissance = regulation(2, csgn, tab_temp, tab_len);
