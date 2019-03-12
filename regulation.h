@@ -12,7 +12,7 @@
 
 float regulationTest(int regul,float csgn,float* tabT, int nT);
 
-float regulation(int mode, float target, float *tab_temp, int tab_len);
+float regulation(int mode, float target, float temp, float prev_temp);
 
 float regulation_error_sum(float target, float current);
 
