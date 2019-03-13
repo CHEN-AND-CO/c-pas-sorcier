@@ -19,7 +19,6 @@ LDFLAGS = -lm									# Libs for all systems
 ifeq ($(detected_OS),Windows)
     LDFLAGS += ./ftd2xx.lib
 else
-	CFLAGS += 
     LDFLAGS += -lftd2xx
 endif
 
