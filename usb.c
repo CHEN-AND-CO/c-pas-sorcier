@@ -1,3 +1,5 @@
 #include "usb.h"
 
-void init_USB(){}
+void initUSB(){}
+
+void finUSB(){}
