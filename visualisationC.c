@@ -41,9 +41,6 @@ void visualisationC(float puissance_f)
          if(fputs(str_pui, sum_file_pointer)==-1){ //Si l'écriture rate
             fprintf(stderr, "Failed to write on %s !", DATA_PATH);    
          }
-         if(str_pui){
-            free(str_pui);
-         }
 
          fclose(sum_file_pointer); // Suppression pointeur de fichier
          fclose(lock); // Suppression pointeur de fichier

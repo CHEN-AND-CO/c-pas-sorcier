@@ -1,6 +1,7 @@
 # 
 
-PROJET = c-pas-sorcier
+EXE_1 = test_simulateur
+EXE_2 = test_usb
 
 ifeq ($(OS),Windows_NT)     					# Windows OS
     detected_OS := Windows
@@ -21,20 +22,23 @@ endif
 
 SRC = $(wildcard *.c)
 NOM = $(basename $(notdir $(SRC)))
-OBJ = $(addprefix obj/, $(addsuffix .o, $(NOM)))
+OBJ = $(subst obj/$(EXE_2).o,,$(subst obj/$(EXE_1).o,,$(addprefix obj/, $(addsuffix .o, $(NOM)))))
 
-all: $(PROJET)
+all: $(EXE_1) $(EXE_2)
 
-remake: clean $(PROJET)
+remake: clean $(EXE_1) $(EXE_2)
 
-$(PROJET) : $(OBJ)
-	$(CC) $(OBJ) $(LDFLAGS) -o $@
+$(EXE_1): $(OBJ) obj/$(EXE_1).o
+	$(CC) $(OBJ) obj/$(EXE_1).o $(LDFLAGS) -o $@
+
+$(EXE_2): $(OBJ) obj/$(EXE_2).o
+	$(CC) $(OBJ) obj/$(EXE_2).o $(LDFLAGS) -o $@
 
 obj/%.o: %.c
 	$(CC) -c $< -I. -o $@ $(CFLAGS)
 
 clean:
-	rm $(OBJ) $(PROJET) obj/*.gch -f
+	rm $(OBJ) obj/$(EXE_1).o obj/$(EXE_2).o $(EXE_1) $(EXE_2) obj/*.gch -f
 
 clear:
-	rm $(OBJ) obj/*.gch -f
+	rm $(OBJ) obj/$(EXE_1).o obj/$(EXE_2).o obj/*.gch -f
