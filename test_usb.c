@@ -17,7 +17,6 @@ int main(){
     usb *myLittleUsb = malloc(sizeof(usb));
     initUSB(myLittleUsb);
 
-	struct simParam_s*  monSimulateur_ps = simConstruct(temperature); // creation du simulateur, puissance intialis�e � 0%
 	int i=1; // increment de boucle
 	
     tab_temp[0] = temperature.interieure;
@@ -32,15 +31,13 @@ int main(){
         
         puissance = regulation(regul_mode, csgn,tab_temp[i-1], tab_temp[i]);
         visualisationC(puissance);
-        temperature=simCalc(puissance,monSimulateur_ps); // simulation de l'environnement
-
+        
         commande(myLittleUsb, puissance);
 
         i++;
         usleep(70000);
     }while(csgn>5);
-
-    simDestruct(monSimulateur_ps);
+    
     free(tab_temp);
     finUSB(myLittleUsb);
 
