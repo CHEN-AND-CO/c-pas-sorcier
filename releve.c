@@ -11,8 +11,9 @@ temp_t releve(usb *in){
     in->status = FT_Read(in->handle, RxBuffer, RxBytes, &BytesReceived);
     if ((in->status == FT_OK) && (BytesReceived == RxBytes)) {// FT_Read OK
 
-        printf("DUMP:%s\t", RxBuffer);
+        
         for(i=0; i<RxBytes; i++){
+            printf("DUMP:%x\t", RxBuffer[i]);
             switch(RxBuffer[i]>>4){
                 case 0:
                     t_ext |= (RxBuffer[i]&0x0F)<<8;
@@ -37,7 +38,7 @@ temp_t releve(usb *in){
             }
         }
 
-        printf("SOText:%d\tSOTint:%d\n", t_ext, t_int);
+        printf("\nSOText:%d\tSOTint:%d\n", t_ext, t_int);
         temperature.exterieure = (float)t_ext*0.04-39.64;
         temperature.interieure = (float)t_int*0.04-39.64;
     }else {
