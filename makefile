@@ -1,4 +1,4 @@
-# 
+# Makefile by Kévin Le Torc'h
 
 EXE_1 = test_simulateur
 EXE_2 = test_usb
@@ -19,8 +19,7 @@ LDFLAGS = -lm									# Libs for all systems
 ifeq ($(detected_OS),Windows)
     LDFLAGS += ./ftd2xx.lib
 else
-	CFLAGS += -L./lib
-    LDFLAGS += -lftd2xx
+    LDFLAGS = -lftd2xx
 endif
 
 SRC = $(wildcard *.c)
@@ -38,7 +37,7 @@ $(EXE_2): $(OBJ) obj/$(EXE_2).o
 	$(CC) $(OBJ) obj/$(EXE_2).o $(LDFLAGS) -o $@
 
 obj/%.o: %.c
-	$(CC) -c $< -I. -o $@ $(CFLAGS)
+	$(CC) -c $< -I. -Ilib -o $@ $(CFLAGS)
 
 clean:
 	rm $(OBJ) obj/$(EXE_1).o obj/$(EXE_2).o $(EXE_1) $(EXE_2) obj/*.gch -f
