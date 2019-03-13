@@ -5,6 +5,7 @@ temp_t releve(usb *in){
     DWORD RxBytes = 6;
     DWORD BytesReceived;
     char RxBuffer[6];
+    unsigned char tmp = 0;
     unsigned int i;
     unsigned short t_ext = 0, t_int = 0;
 
@@ -14,24 +15,26 @@ temp_t releve(usb *in){
         
         for(i=0; i<RxBytes; i++){
             printf("DUMP:%x\t", RxBuffer[i]);
-            switch(RxBuffer[i]>>4){
+
+            tmp = RxBuffer[i]&0xFF;
+            switch(tmp>>4){
                 case 0:
-                    t_ext |= (RxBuffer[i]&0x0F)<<8;
+                    t_ext |= (tmp&0x0F)<<8;
                 break;
                 case 1:
-                    t_ext |= (RxBuffer[i]&0x0F)<<4;
+                    t_ext |= (tmp&0x0F)<<4;
                 break;
                 case 2:
-                    t_ext |= (RxBuffer[i]&0x0F);
+                    t_ext |= (tmp&0x0F);
                 break;
                 case 8:
-                    t_int |= (RxBuffer[i]&0x0F)<<8;
+                    t_int |= (tmp&0x0F)<<8;
                 break;
                 case 9:
-                    t_int |= (RxBuffer[i]&0x0F)<<4;
+                    t_int |= (tmp&0x0F)<<4;
                 break;
                 case 10:
-                    t_int |= (RxBuffer[i]&0x0F);
+                    t_int |= (tmp&0x0F);
                 break;
                 default:
                 break;
