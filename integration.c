@@ -4,7 +4,7 @@ void integrationTest(int regul,temp_t tInit,int nIterations){
     temp_t temperature = tInit;
     float csgn = consigne(0.0), puissance;
     int tab_len = 1;
-    float *tab_temp = malloc(tab_len*sizeof(float *));
+    float *tab_temp = malloc(tab_len*sizeof(float));
 
 	struct simParam_s*  monSimulateur_ps = simConstruct(temperature); // creation du simulateur, puissance intialis�e � 0%
 	int i=1; // increment de boucle
@@ -15,7 +15,7 @@ void integrationTest(int regul,temp_t tInit,int nIterations){
         visualisationT(temperature);
         csgn = consigne(csgn);
 
-        tab_temp = realloc(tab_temp, ++tab_len*sizeof(float *));
+        tab_temp = realloc(tab_temp, ++tab_len*sizeof(float));
         tab_temp[tab_len-1]=temperature.interieure;
         
         puissance = regulation(regul, csgn,tab_temp[i-1], tab_temp[i]);

@@ -23,14 +23,14 @@ void visualisationC(float puissance_f)
             return;
          }
 
-         char *str_pui = malloc(MAX_BUFFER_SIZE*sizeof(char *)); //Chaine pour consigne de puissance
+         char *str_pui = malloc(MAX_BUFFER_SIZE*sizeof(char)); //Chaine pour consigne de puissance
          if(puissance_f > 0){
             str_pui = "true\n";
          }else{
             str_pui = "false\n";
          }
 
-         char *tmp = calloc(MAX_BUFFER_SIZE, sizeof(char *));
+         char *tmp = malloc(MAX_BUFFER_SIZE*sizeof(char));
          rewind(sum_file_pointer);
          tmp = fgets(tmp, MAX_BUFFER_SIZE, sum_file_pointer);
          tmp = fgets(tmp, MAX_BUFFER_SIZE, sum_file_pointer);
