@@ -19,7 +19,11 @@ LDFLAGS = -lm									# Libs for all systems
 ifeq ($(detected_OS),Windows)
     LDFLAGS += ./ftd2xx.lib
 else
+<<<<<<< HEAD
     LDFLAGS += -lftd2xx
+=======
+    LDFLAGS = -lftd2xx
+>>>>>>> 46573ac1ee55c06b7fe808d839b1acf21451c62d
 endif
 
 SRC = $(wildcard *.c)
