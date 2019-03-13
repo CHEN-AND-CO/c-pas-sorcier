@@ -23,9 +23,9 @@ float regulation(int mode, float target, float temp, float prev_temp) {
 		break;
 
 		case 2: // PID
-			p = PID_KP * (target - temp); // Kp*(erreur)
-			i = PID_KI * regulation_error_sum(target, temp) * 5; // Ki*(somme erreurs)
-			d = PID_KD * (prev_temp - temp) / 100; // Kd*(erreur-erreur_precedente)
+			p = 6*PID_KP * (target - temp); // Kp*(erreur)
+			i = PID_KI * regulation_error_sum(target, temp) * 1.75; // Ki*(somme erreurs)
+			d = PID_KD * (prev_temp - temp) / 200; // Kd*(erreur-erreur_precedente)
 			pid = p+i+d;
 
 			if (pid < 0) {
