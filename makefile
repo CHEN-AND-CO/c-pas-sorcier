@@ -20,6 +20,7 @@ ifeq ($(detected_OS),Windows)
     LDFLAGS += ./ftd2xx.lib
 endif
 ifeq ($(detected_OS),Linux)
+	CFLAGS += -L./lib
     LDFLAGS += -lftd2xx
 endif
 
