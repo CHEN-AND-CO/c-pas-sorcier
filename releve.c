@@ -35,6 +35,7 @@ temp_t releve(usb *in){
             }
         }
 
+        printf("SOText:%d\tSOTint:%d\n", t_ext, t_int);
         temperature.exterieure = (float)t_ext*0.04-39.64;
         temperature.interieure = (float)t_int*0.04-39.64;
     }else {
