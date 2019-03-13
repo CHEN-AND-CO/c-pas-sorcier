@@ -35,7 +35,7 @@ int main(){
         commande(myLittleUsb, puissance);
 
         i++;
-        //usleep(70000);
+        usleep(70000);
     }while(csgn>5);
 
     free(tab_temp);

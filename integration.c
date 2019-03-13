@@ -22,7 +22,7 @@ void integrationTest(int regul,temp_t tInit,int nIterations){
         visualisationC(puissance);
         temperature=simCalc(puissance,monSimulateur_ps); // simulation de l'environnement
 
-        usleep(70000);
+        //usleep(70000);
     }while(i++<nIterations);
 
     simDestruct(monSimulateur_ps);
