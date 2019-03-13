@@ -17,6 +17,7 @@ typedef struct {
 }usb;
 
 void initUSB(usb *in);
+
 void finUSB(usb *in);
 
 #endif /* USB_H */

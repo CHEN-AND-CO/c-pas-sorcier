@@ -13,11 +13,14 @@ ifeq ($(CC), cc)
 	CC = gcc
 endif
 
+INCLUDES = -I. -Ilib
 CFLAGS = -g -Wall -Wextra -Os -std=gnu11		# Compiler flags
 LDFLAGS = -lm									# Libs for all systems
 
 ifeq ($(detected_OS),Windows)
     LDFLAGS += ./ftd2xx.lib
+	EXE_1 += .exe
+	EXE_2 += .exe
 else
     LDFLAGS += -lftd2xx
 endif
@@ -37,7 +40,7 @@ $(EXE_2): $(OBJ) obj/$(EXE_2).o
 	$(CC) $(OBJ) obj/$(EXE_2).o $(LDFLAGS) -o $@
 
 obj/%.o: %.c
-	$(CC) -c $< -I. -Ilib -o $@ $(CFLAGS)
+	$(CC) -c $< $(INCLUDES) -o $@ $(CFLAGS)
 
 clean:
 	rm $(OBJ) obj/$(EXE_1).o obj/$(EXE_2).o $(EXE_1) $(EXE_2) obj/*.gch -f
