@@ -32,7 +32,7 @@ struct simParam_s* simConstruct(temp_t temperature){
         perror("Erreur dans simConstruct() : impossible d'ouvrir le fichier trace.txt\n");
         exit(EXIT_FAILURE);
     }
-    fprintf(param_ps->trace_pf,"%f \t %f \t %f \t %f\n",param_ps->compteur_i*DELTA_T,0.0,param_ps->tempExt_f,param_ps->tempInt_f);      
+    fprintf(param_ps->trace_pf,"%f,%f,%f,%f\n",param_ps->compteur_i*DELTA_T,0.0,param_ps->tempExt_f,param_ps->tempInt_f);      
 return param_ps;
 }
 
@@ -55,9 +55,9 @@ temp_t simCalc(float puissance, struct simParam_s* param_ps){
     printf("Simulateur : P=%g%%, Temp ext.=%g deg, Temp int.=%g deg\n",puissance,param_ps->tempExt_f,param_ps->tempInt_f);
     
     param_ps->compteur_i++;
-    fprintf(param_ps->trace_pf,"%f \t %f \t %f \t %f\n",param_ps->compteur_i*DELTA_T,puissance,param_ps->tempExt_f,param_ps->tempInt_f);
-
-
+    fprintf(param_ps->trace_pf, "%f,%f,%f,%f\n", param_ps->compteur_i * DELTA_T, 0.0, param_ps->tempExt_f, param_ps->tempInt_f);
+    fflush(param_ps->trace_pf);
+    
     /*sauvegarde de la temperature*/
     param_ps->tempInt_f = temperature.interieure;
 
