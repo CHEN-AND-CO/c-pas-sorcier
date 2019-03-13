@@ -47,3 +47,9 @@ clean:
 
 clear:
 	rm $(OBJ) obj/$(EXE_1).o obj/$(EXE_2).o obj/*.gch -f
+
+run-usb: $(EXE_2)
+	./$(EXE_2)
+
+run-simu: $(EXE_1)
+	./$(EXE_1)
