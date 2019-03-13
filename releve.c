@@ -9,38 +9,34 @@ temp_t releve(usb *in){
     unsigned short t_ext = 0, t_int = 0;
 
     in->status = FT_Read(in->handle, RxBuffer, RxBytes, &BytesReceived);
-    if (in->status == FT_OK) {
-        if (BytesReceived == RxBytes) {// FT_Read OK
-            for(i=0; i<RxBytes; i++){
-                switch(RxBuffer[i]>>4){
-                    case 0:
-                        t_ext |= (RxBuffer[i]&0x0F)<<8;
-                    break;
-                    case 1:
-                        t_ext |= (RxBuffer[i]&0x0F)<<4;
-                    break;
-                    case 2:
-                        t_ext |= (RxBuffer[i]&0x0F);
-                    break;
-                    case 8:
-                        t_int |= (RxBuffer[i]&0x0F)<<8;
-                    break;
-                    case 9:
-                        t_int |= (RxBuffer[i]&0x0F)<<4;
-                    break;
-                    case 10:
-                        t_int |= (RxBuffer[i]&0x0F);
-                    break;
-                    default:
-                    break;
-                }
+    if ((in->status == FT_OK) && (BytesReceived == RxBytes)) {// FT_Read OK
+        for(i=0; i<RxBytes; i++){
+            switch(RxBuffer[i]>>4){
+                case 0:
+                    t_ext |= (RxBuffer[i]&0x0F)<<8;
+                break;
+                case 1:
+                    t_ext |= (RxBuffer[i]&0x0F)<<4;
+                break;
+                case 2:
+                    t_ext |= (RxBuffer[i]&0x0F);
+                break;
+                case 8:
+                    t_int |= (RxBuffer[i]&0x0F)<<8;
+                break;
+                case 9:
+                    t_int |= (RxBuffer[i]&0x0F)<<4;
+                break;
+                case 10:
+                    t_int |= (RxBuffer[i]&0x0F);
+                break;
+                default:
+                break;
             }
-
-            temperature.exterieure = t_ext*0.04-39.64;
-            temperature.interieure = t_int*0.04-39.64;
-        }else {
-            fprintf(stderr, "FT_Read Timeout \n");
         }
+
+        temperature.exterieure = t_ext*0.04-39.64;
+        temperature.interieure = t_int*0.04-39.64;
     }else {
         fprintf(stderr, "FT_Read Error \n");
     }
