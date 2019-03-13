@@ -9,7 +9,10 @@ else
     detected_OS := $(shell uname) 				# Unix Based OS
 endif
 
-CC = gcc
+ifeq ($(CC), cc)
+	CC = gcc
+endif
+
 CFLAGS = -g -Wall -Wextra -Os -std=gnu11		# Compiler flags
 LDFLAGS = -lm									# Libs for all systems
 
