@@ -23,6 +23,10 @@ void visualisationT(temp_t t)
 
         if ( !fTemp ) {
             printf("[ERROR] Failed to open file 'data.txt'\n");
+
+            fclose(lock);
+            remove(DATA_LOCK_PATH);
+
             return;
         }
 

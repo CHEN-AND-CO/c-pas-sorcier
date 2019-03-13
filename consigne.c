@@ -18,6 +18,9 @@ float consigne(float csgn)
          if(!sum_file_pointer){ // Vérifie si on a réussi à ouvrir le fichier
                fprintf(stderr, "Failed to open %s !", CONSIGNE_PATH);
 
+                  free(lock);
+                  remove(CONSIGNE_LOCK_PATH);
+
                return csgn;
          }
 

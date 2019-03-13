@@ -16,6 +16,10 @@ void visualisationC(float puissance_f)
 
          if(!sum_file_pointer){ // Vérifie si on a réussi à ouvrir le fichier
             fprintf(stderr, "Failed to open %s !", DATA_PATH);
+
+            fclose(lock);
+            remove(DATA_LOCK_PATH);
+
             return;
          }
 
@@ -26,13 +30,19 @@ void visualisationC(float puissance_f)
             str_pui = "false\n";
          }
 
-         char tmp[MAX_BUFFER_SIZE] = {0};
+         char *tmp = calloc(MAX_BUFFER_SIZE, sizeof(char *));
          rewind(sum_file_pointer);
-         fgets(tmp, MAX_BUFFER_SIZE, sum_file_pointer);
-         fgets(tmp, MAX_BUFFER_SIZE, sum_file_pointer);
-         
+         tmp = fgets(tmp, MAX_BUFFER_SIZE, sum_file_pointer);
+         tmp = fgets(tmp, MAX_BUFFER_SIZE, sum_file_pointer);
+         if(tmp) {
+            free(tmp);
+         }
+
          if(fputs(str_pui, sum_file_pointer)==-1){ //Si l'écriture rate
             fprintf(stderr, "Failed to write on %s !", DATA_PATH);    
+         }
+         if(str_pui){
+            free(str_pui);
          }
 
          fclose(sum_file_pointer); // Suppression pointeur de fichier

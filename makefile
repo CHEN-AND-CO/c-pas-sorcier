@@ -1,13 +1,16 @@
+# 
+
 PROJET = c-pas-sorcier
 
-ifeq ($(OS),Windows_NT)     # Windows
+ifeq ($(OS),Windows_NT)     					# Windows OS
     detected_OS := Windows
 else
-    detected_OS := $(shell uname)  # Unix Based
+    detected_OS := $(shell uname) 				# Unix Based OS
 endif
 
-CFLAGS = -g -Wall -Wextra -Os -std=gnu11
-LDFLAGS = -lm #-lSDL -lSDL_image -lSDL_ttf -lSDL_mixer -lSDL_gfx -lm -lGL -lGLU
+CC = gcc
+CFLAGS = -g -Wall -Wextra -Os -std=gnu11		# Compiler flags
+LDFLAGS = -lm									# Libs for all systems
 
 ifeq ($(detected_OS),Windows)
     LDFLAGS += ./ftd2xx.lib
@@ -25,10 +28,10 @@ all: $(PROJET)
 remake: clean $(PROJET)
 
 $(PROJET) : $(OBJ)
-	gcc $(OBJ) $(LDFLAGS) -o $@
+	$(CC) $(OBJ) $(LDFLAGS) -o $@
 
 obj/%.o: %.c
-	gcc -c $< -I. -o $@ $(CFLAGS)
+	$(CC) -c $< -I. -o $@ $(CFLAGS)
 
 clean:
 	rm $(OBJ) $(PROJET) obj/*.gch -f
