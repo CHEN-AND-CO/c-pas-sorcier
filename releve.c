@@ -4,12 +4,14 @@ temp_t releve(usb *in){
     temp_t temperature = {-1,-1};
     DWORD RxBytes = 6;
     DWORD BytesReceived;
-    char RxBuffer[MAX_BUFFER_SIZE];
+    char RxBuffer[6];
     unsigned int i;
     unsigned short t_ext = 0, t_int = 0;
 
     in->status = FT_Read(in->handle, RxBuffer, RxBytes, &BytesReceived);
     if ((in->status == FT_OK) && (BytesReceived == RxBytes)) {// FT_Read OK
+
+        printf("DUMP:%s\t", RxBuffer);
         for(i=0; i<RxBytes; i++){
             switch(RxBuffer[i]>>4){
                 case 0:
