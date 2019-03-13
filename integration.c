@@ -21,5 +21,7 @@ void integrationTest(int regul,temp_t tInit,int nIterations){
         puissance = regulation(regul, csgn,tab_temp[i-1], tab_temp[i]);
         visualisationC(puissance);
         temperature=simCalc(puissance,monSimulateur_ps); // simulation de l'environnement
+
+        usleep(70000);
     }while(i++<nIterations);
 }
