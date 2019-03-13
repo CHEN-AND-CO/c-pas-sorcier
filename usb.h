@@ -7,4 +7,6 @@
 #ifdef linux
 #endif /* linux */
 
+void init_USB();
+
 #endif /* USB_H */
