@@ -9,4 +9,7 @@ void initUSB(usb *in){
     }
 }
 
-void finUSB(){}
+void finUSB(usb *in){
+    FT_Close(in->handle);
+    free(in);
+}
