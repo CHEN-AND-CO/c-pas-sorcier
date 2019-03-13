@@ -26,10 +26,11 @@ int main(){
         tab_temp = realloc(tab_temp, ++tab_len*sizeof(float));
         tab_temp[tab_len-1]=temperature.interieure;
         
-        puissance = regulation(2, csgn,tab_temp[i-1], tab_temp[i++]);
+        puissance = regulation(regul_mode, csgn,tab_temp[i-1], tab_temp[i]);
         visualisationC(puissance);
         temperature=simCalc(puissance,monSimulateur_ps); // simulation de l'environnement
 
+        i++;
         usleep(70000);
     }while(csgn>5);
 
