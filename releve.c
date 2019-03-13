@@ -35,8 +35,8 @@ temp_t releve(usb *in){
             }
         }
 
-        temperature.exterieure = t_ext*0.04-39.64;
-        temperature.interieure = t_int*0.04-39.64;
+        temperature.exterieure = (float)t_ext*0.04-39.64;
+        temperature.interieure = (float)t_int*0.04-39.64;
     }else {
         fprintf(stderr, "FT_Read Error \n");
     }
