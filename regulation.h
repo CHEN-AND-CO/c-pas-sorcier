@@ -19,12 +19,16 @@
 /* Function for the automatic regulation test */
 float regulationTest(int regul, float csgn, float *tabT, int nT);
 
+/* Regulation interface */
 float regulation(int mode, float target, float temp, float prev_temp);
 
+/* Regulation function using PID */
 float regulation_pid(float target, float temp, float prev_temp);
 
+/* Calculate the sum of errors for the regulation_pid function (only) */
 float regulation_error_sum(float target, float current);
 
+/* Regulation function using PID for the automatic test */
 float regulation_pid_test(float target, float temp_now, float temp_prev);
 
 #endif /* REGULATION_H */

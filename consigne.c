@@ -21,7 +21,7 @@ float consigne(float csgn)
     }
 
     if (!sum_file_pointer)
-    { // Check if open is successful
+    { // Check if open is successfull
       fprintf(stderr, "Failed to open %s !", CONSIGNE_PATH);
 
       free(lock);
@@ -30,18 +30,18 @@ float consigne(float csgn)
       return csgn;
     }
 
-    char str_pui[MAX_BUFFER_SIZE] = {0}; // Chaine pour consigne de puissance
+    char str_pui[MAX_BUFFER_SIZE] = {0}; // target temperature string
     if (!fgets(str_pui, MAX_BUFFER_SIZE,
                sum_file_pointer))
-    { // Si la lecture rate
-      fprintf(stderr, "Failed to read on %s !", CONSIGNE_PATH);
+    {
+      fprintf(stderr, "Failed to read on %s !", CONSIGNE_PATH); // Read Failed
     }
     csgn = atof(str_pui);
 
-    fclose(sum_file_pointer); // Suppression pointeur de fichier
-    fclose(lock);             // Suppression pointeur de fichier
+    fclose(sum_file_pointer); // Delete file pointer
+    fclose(lock);             // Delete file pointer
 
-    remove(CONSIGNE_LOCK_PATH); // On retire le verrou
+    remove(CONSIGNE_LOCK_PATH); // Lock removed
   }
 
   return csgn;

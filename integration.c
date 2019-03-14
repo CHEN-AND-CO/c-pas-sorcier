@@ -2,29 +2,28 @@
 
 void integrationTest(int regul, temp_t tInit, int nIterations)
 {
-    temp_t temperature = tInit;
-    float csgn = consigne(0.0), puissance;
-    int tab_len = 1;
-    float *tab_temp = malloc(tab_len * sizeof(float));
+    float csgn = 0, puissance;                         // Target temperature and power command
+    int tab_len = 1;                                   // History length
+    float *tab_temp = malloc(tab_len * sizeof(float)); // Allocate the history into the memory
 
-    struct simParam_s *monSimulateur_ps = simConstruct(temperature); // creation du simulateur, puissance intialis�e � 0%
-    int i = 1;                                                       // increment de boucle
+    struct simParam_s *monSimulateur_ps = simConstruct(tInit); // create the simulator
+    int i = 1;                                                 // counter
 
-    tab_temp[0] = temperature.interieure;
+    tab_temp[0] = tInit.interieure; // Add the initial inside temperature to the history
 
     do
     {
-        visualisationT(temperature);
-        csgn = consigne(csgn);
+        visualisationT(tInit); // Write the current temperatures into the data file
+        csgn = consigne(csgn); // Read the target temperature from the consigne file
 
-        tab_temp = realloc(tab_temp, ++tab_len * sizeof(float));
-        tab_temp[tab_len - 1] = temperature.interieure;
+        tab_temp = realloc(tab_temp, ++tab_len * sizeof(float)); // Expand the history
+        tab_temp[tab_len - 1] = tInit.interieure;                // Add the current inside temperature to the history
 
-        puissance = regulation(regul, csgn, tab_temp[i - 1], tab_temp[i]);
-        visualisationC(puissance);
-        temperature = simCalc(puissance, monSimulateur_ps); // simulation de l'environnement
+        puissance = regulation(regul, csgn, tab_temp[i - 1], tab_temp[i]); // Get the power needed for temperature regulation
+        visualisationC(puissance);                                         // Write the power command
+        tInit = simCalc(puissance, monSimulateur_ps);                      // Environment simulation
     } while (i++ < nIterations);
 
-    simDestruct(monSimulateur_ps);
-    free(tab_temp);
+    simDestruct(monSimulateur_ps); // Delete the simulator
+    free(tab_temp);                // Clear from the memory the history
 }
