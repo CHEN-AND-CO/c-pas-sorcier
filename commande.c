@@ -8,7 +8,7 @@ void commande(usb *usb, float puis) {
       FT_Write(usb->handle, &tx_buf, sizeof(&tx_buf), &written); // USB Write
 
   if (usb->status == FT_OK) { // Write success
-    printf("FT_Write: Successfully written %d bytes :\t(%x)\n", written,
+    printf("FT_Write: Successfully written %ld bytes :\t(%x)\n", written,
            tx_buf);
   } else {
     perror("FT_Write: Unable to write.\n"); // Failure
