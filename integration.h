@@ -13,6 +13,6 @@
 #include "consigne.h"
 
 /* Test the simulation and regulation for the automatic tester */
-void integrationTest(int regul,temp_t tInit,int nIterations);
+void integrationTest(int regul, temp_t tInit, int nIterations);
 
 #endif /* INTEGRATION_H */

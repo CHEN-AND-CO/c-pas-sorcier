@@ -1,7 +1,7 @@
-#ifndef REGULATION_H 
+#ifndef REGULATION_H
 #define REGULATION_H
 
-#include "define.h" 
+#include "define.h"
 
 #define TOR_LOW_POWER 0
 #define TOR_FULL_POWER 40
@@ -17,7 +17,7 @@
 #define SAMPLE_RATE 10
 
 /* Function for the automatic regulation test */
-float regulationTest(int regul,float csgn,float* tabT, int nT);
+float regulationTest(int regul, float csgn, float *tabT, int nT);
 
 float regulation(int mode, float target, float temp, float prev_temp);
 

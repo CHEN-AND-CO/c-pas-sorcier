@@ -12,16 +12,22 @@ void visualisationT(temp_t t)
     if (access(DATA_LOCK_PATH, F_OK) != -1)
     {
         printf("[ERROR] File %s locked\n", DATA_PATH);
-    } else {
+    }
+    else
+    {
         FILE *lock = fopen(DATA_LOCK_PATH, "w"); // Crée le verrou d'accès
-        
-        if ( access(DATA_PATH, F_OK) == -1) {
+
+        if (access(DATA_PATH, F_OK) == -1)
+        {
             fTemp = fopen(DATA_PATH, "w+");
-        } else {
+        }
+        else
+        {
             fTemp = fopen(DATA_PATH, "r+");
         }
 
-        if ( !fTemp ) {
+        if (!fTemp)
+        {
             printf("[ERROR] Failed to open file 'data.txt'\n");
 
             fclose(lock);
@@ -30,7 +36,7 @@ void visualisationT(temp_t t)
             return;
         }
 
-        fseek(fTemp, 0, SEEK_SET);  //Set cursor to file beginning
+        fseek(fTemp, 0, SEEK_SET); //Set cursor to file beginning
         fprintf(fTemp, "%.1f\n%.1f\n", t.exterieure, t.interieure);
 
         fclose(fTemp);

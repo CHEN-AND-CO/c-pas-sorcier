@@ -11,10 +11,11 @@
 #include "ftd2xx_windaube.h"
 #endif
 
-typedef struct {
+typedef struct
+{
     FT_STATUS status;
     FT_HANDLE handle;
-}usb;
+} usb;
 
 void initUSB(usb *in);
 
