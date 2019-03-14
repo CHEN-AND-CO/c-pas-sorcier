@@ -40,8 +40,8 @@ void visualisationT(temp_t t)
         fprintf(fTemp, "%.1f\n%.1f\n", t.exterieure, t.interieure);
 
         fclose(fTemp);
-        fclose(lock); // Suppression pointeur de fichier
+        fclose(lock); // Remove the file pointer
 
-        remove(DATA_LOCK_PATH); // On retire le verrou
+        remove(DATA_LOCK_PATH); // Delete the lock file
     }
 }
