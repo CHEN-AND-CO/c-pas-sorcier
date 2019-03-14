@@ -24,6 +24,8 @@ int main(){
         puissance = regulation(mode_regul, csgn,tab_temp[i-1], tab_temp[i]); // Régulation 
         visualisationC(puissance); //MaJ Commande chauffage (true/false)
         temperature=simCalc(puissance,monSimulateur_ps); // simulation de l'environnement
+    
+        usleep(100e3);
     }while(csgn>5 && i++); //Tant que la consigne > 5°c on incrémente i
 
     simDestruct(monSimulateur_ps); // Suppression du simulateur

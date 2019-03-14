@@ -32,6 +32,12 @@ SRC = $(wildcard *.c)
 NOM = $(basename $(notdir $(SRC)))
 OBJ = $(subst obj/$(EXE_2).o,,$(subst obj/$(EXE_1).o,,$(addprefix obj/, $(addsuffix .o, $(NOM)))))
 
+run-usb: $(EXE_2)
+	./$(EXE_2)
+
+run-simu: $(EXE_1)
+	./$(EXE_1)
+
 all: $(EXE_1) $(EXE_2)							# Build all executables
 
 rebuild: remake									# Clean and build all executables
@@ -56,8 +62,5 @@ clean:
 clear:
 	rm $(OBJ) obj/$(EXE_1).o obj/$(EXE_2).o obj/*.gch -f
 
-run-usb: $(EXE_2)
-	./$(EXE_2)
-
-run-simu: $(EXE_1)
-	./$(EXE_1)
+zip-test:
+	zip test consigne.* define.h integration.* regulation.* simulateur.* visualisation*

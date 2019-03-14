@@ -7,37 +7,24 @@ float regulationTest(int regul, float csgn, float *tabT, int nT) {
 
 	for (i = 1; i < nT; i++)
 	{
-		//cmd = regulation(regul, csgn, tabT[i], tabT[i-1]);
-		cmd = regulation_pid_de_ses_morts(regul, csgn, tabT[i-1], tabT[i]);
+		cmd = regulation(10+regul, csgn, tabT[i], tabT[i-1]);
 	}
 
 	return cmd;
 }
 
 float regulation(int mode, float target, float temp, float prev_temp) {
-	float p,i,d, pid;	
-
 	switch(mode) {
-		case 1: // ToR
+		case 1: case 11: // ToR
 			return (temp < target) ? TOR_FULL_POWER : TOR_LOW_POWER;
 		break;
 
-		case 2: // PID
-			p = 6*PID_KP * (target - temp); // Kp*(erreur)
-			i = PID_KI * regulation_error_sum(target, temp) * 1.75; // Ki*(somme erreurs)
-			d = PID_KD * (prev_temp - temp) / 200; // Kd*(erreur-erreur_precedente)
-			pid = p+i+d;
+		case 2: // Optimized PID
+			return regulation_pid(target, temp, prev_temp);
+		break;
 
-			if (pid < 0) {
-				pid = 0;
-				regulation_error_sum(-target, -temp); // Substract error to mitigate the impact of saturated errors in the Integrative factor
-			} else if (pid > 100) {
-				pid = 100;
-				regulation_error_sum(-target, -temp); // Substract error to mitigate the impact of saturated errors in the Integrative factor
-			}
-			printf("T:%.4f\tC:%.4f\tP:%.4f\tI:%.4f\tD:%.4f\tOut:%.4f\n\n", target, temp, p, i, d, pid);
-
-			return pid;
+		case 12: // Normal PID for automatic test
+			return regulation_pid_test(target, temp, prev_temp);
 		break;
 
 		default:
@@ -48,50 +35,49 @@ float regulation(int mode, float target, float temp, float prev_temp) {
 	}
 }
 
+float regulation_pid(float target, float temp, float prev_temp){
+	float pid = 0, p,i,d;
+
+	p = PID_OPT_KP * (target - temp); // Kp*(erreur)
+	i = PID_OPT_KI * regulation_error_sum(target, temp); // Ki*(somme erreurs)
+	d = PID_OPT_KD * (prev_temp - temp); // Kd*(erreur-erreur_precedente)
+	pid = p+i+d;
+
+	if (pid < 0) {
+		pid = 0;
+		regulation_error_sum(-target, -temp); // Substract error to mitigate the impact of saturated errors in the Integrative factor
+	} else if (pid > 100) {
+		pid = 100;
+		regulation_error_sum(-target, -temp); // Substract error to mitigate the impact of saturated errors in the Integrative factor
+	}
+
+	printf("T:%.4f\tC:%.4f\tP:%.4f\tI:%.4f\tD:%.4f\tOut:%.4f\n\n", target, temp, p, i, d, pid);
+
+	return pid;
+}
+
 float regulation_error_sum(float target, float current) {
 	static float i = 0;
 
-	i += (target - current);
-
-	return i;
+	return i += (target - current);
 }
 
-float regulation_pid_de_ses_morts(int mode, float target, float temp_prev, float temp_now){
-	static float integ = 0;
-	float p,i, d, pid;
+float regulation_pid_test(float target, float temp_now, float temp_prev){
+	static float i = 0;
+	float pid;
+	float error = target - temp_now;
+	float error_prev = target - temp_prev;
 
-	float err, errp;
-	int dt = 10;
+	i += (SAMPLE_RATE*error+(SAMPLE_RATE*(error_prev-error))/2);
 
-	switch(mode) {
-		case 1: // ToR
-			return (temp_now < target) ? TOR_FULL_POWER : TOR_LOW_POWER;
-		break;
-		case 2: // PID
-			errp = target - temp_prev;
-			err = target - temp_now;
+	pid = 	PID_KP*error 
+			+ PID_KI*i 
+			+ PID_KD*(error-error_prev)/SAMPLE_RATE;
 
-			p = PID_KP*(err);
-			integ += (dt*err+(dt*(errp-err))/2);
-			i = PID_KI*integ;
-			d = PID_KD*(err-errp)/dt;
-
-			pid = p+i+d;
-
-			if(pid<0){
-				pid = 0;
-			}else if(pid>100){
-				pid = 100;
-			}
-
-			return pid;
-		break;
-
-		default:
-			fprintf(stderr, "Error : mode %d is invalid !", mode);
-
-			return 0;
-		break;
+	if(pid<0){
+		pid = 0;
+	}else if(pid>100){
+		pid = 100;
 	}
 
 	return pid;
