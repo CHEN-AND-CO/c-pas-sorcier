@@ -17,14 +17,14 @@ void visualisationT(temp_t t)
     {
         FILE *lock = fopen(DATA_LOCK_PATH, "w"); // Crée le verrou d'accès
 
-        if (access(DATA_PATH, F_OK) == -1)
-        {
-            fTemp = fopen(DATA_PATH, "w+");
-        }
-        else
-        {
-            fTemp = fopen(DATA_PATH, "r+");
-        }
+        if (access(DATA_PATH, F_OK) == -1) {
+            fTemp = fopen(DATA_PATH, "w+"); // Create the data file
+            fputs("0.0\n0.0\ntrue\n", fTemp);
+
+            fclose(fTemp);
+        } 
+
+        fTemp = fopen(DATA_PATH, "r"); // Open the data file
 
         if (!fTemp)
         {
