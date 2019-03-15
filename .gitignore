@@ -1,6 +1,5 @@
 *.code-workspace
 c-pas-sorcier
-simulateur/obj/*
 obj/*
 *.o
 *.ghc
@@ -12,4 +11,5 @@ data.txt
 trace.txt
 test_usb
 test_simulateur
-
+.vscode
+*.exe
