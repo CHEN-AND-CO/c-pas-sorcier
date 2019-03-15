@@ -66,3 +66,11 @@ run-simu: $(EXE_1)$(EXTENSION)
 
 zip-test:
 	zip test consigne.* define.h integration.* regulation.* simulateur.* visualisation*
+
+install-libftd2xx:
+	sudo cp lib/libftd2xx.so /usr/lib/
+	sudo cp lib/libftd2xx.a /usr/lib/
+	sudo chmod 0755 /usr/lib/libftd2xx.so
+	sudo cp lib/libftd2xx.so /usr/local/lib/
+	sudo cp lib/libftd2xx.a /usr/lib/
+	sudo chmod 0755 /usr/local/lib/libftd2xx.so
