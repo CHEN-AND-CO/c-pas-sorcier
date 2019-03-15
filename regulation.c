@@ -7,7 +7,7 @@ float regulationTest(int regul, float csgn, float *tabT, int nT)
 
 	for (i = 1; i < nT; i++) // Do the regulation test nT times
 	{
-		cmd = regulation(10 + regul, csgn, tabT[i], tabT[i - 1]);
+		cmd = regulation(10 + regul, csgn, tabT[i], tabT[i - 1]); // +10 for the the tests modes
 	}
 
 	return cmd;
@@ -74,12 +74,12 @@ float regulation_pid_test(float target, float temp_now, float temp_prev)
 {
 	static float i = 0; // "i" keep the previous value
 	float pid;
-	float error = target - temp_now;
-	float error_prev = target - temp_prev;
+	float error = target - temp_now;		// Current error
+	float error_prev = target - temp_prev;	// Previous error
 
 	i += (SAMPLE_RATE * error + (SAMPLE_RATE * (error_prev - error)) / 2); // Local integration of the error
 
-	pid = PID_KP * error + PID_KI * i + PID_KD * (error - error_prev) / SAMPLE_RATE;
+	pid = PID_KP * error + PID_KI * i + PID_KD * (error - error_prev) / SAMPLE_RATE; // yup
 
 	if (pid < 0) // Saturation (under 0)
 	{

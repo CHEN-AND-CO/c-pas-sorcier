@@ -2,16 +2,16 @@
 
 temp_t releve() {
   usb *in = malloc(sizeof(usb));
-  initUSB(in);
+  initUSB(in);              // Open an USB connexion
 
   temp_t temperature = {-1,
-                        -1}; // By default the temperatures will be -1 and -1
-  DWORD RxBytes = 6;         // 3 Bytes for t_ext and 3 others for t_int
-  DWORD BytesReceived;       //
-  char RxBuffer[6];          // Buffer for reception
-  unsigned char tmp = 0;
-  unsigned int i;
-  unsigned short t_ext = 0, t_int = 0;
+                        -1};            // By default the temperatures will be -1 and -1
+  DWORD RxBytes = 6;                    // 3 Bytes for t_ext and 3 others for t_int
+  DWORD BytesReceived;                  // Bytes received will go there
+  char RxBuffer[6];                     // Buffer for reception
+  unsigned char tmp = 0;                // 
+  unsigned int i;                       //
+  unsigned short t_ext = 0, t_int = 0;  //
 
   in->status = FT_Read(in->handle, RxBuffer, RxBytes, &BytesReceived);
   if ((in->status == FT_OK) && (BytesReceived == RxBytes)) // FT_Read OK
