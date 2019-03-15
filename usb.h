@@ -12,8 +12,10 @@ typedef struct
     FT_HANDLE handle;
 } usb;
 
+/* Open an USB Connexion */
 void initUSB(usb *in);
 
+/* Close and delete the USB connexion */
 void finUSB(usb *in);
 
 #endif /* USB_H */

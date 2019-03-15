@@ -13,9 +13,9 @@ float consigne(float csgn)
 
     if (access(CONSIGNE_PATH, F_OK) == -1) {
       sum_file_pointer = fopen(CONSIGNE_PATH, "w+"); // Create the consigne file
-      fputs("0\n", sum_file_pointer);
+      fputs("0\n", sum_file_pointer); // Write a default target temperature
 
-      fclose(sum_file_pointer);
+      fclose(sum_file_pointer); // Close the file
     } 
 
     sum_file_pointer = fopen(CONSIGNE_PATH, "r"); // Open the consigne file
@@ -24,8 +24,8 @@ float consigne(float csgn)
     {
       fprintf(stderr, "Failed to open %s !\n", CONSIGNE_PATH);
 
-      free(lock);
-      remove(CONSIGNE_LOCK_PATH);
+      free(lock); // Remove the lock
+      remove(CONSIGNE_LOCK_PATH); // Delete lock
 
       return csgn;
     }

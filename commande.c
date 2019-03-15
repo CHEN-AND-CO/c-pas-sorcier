@@ -2,12 +2,12 @@
 
 void commande(float puis) {
   usb *in = malloc(sizeof(usb));
-  initUSB(in);
+  initUSB(in); // Open USB Connexion
 
   DWORD written = 0; // Bytes written
   unsigned char tx_buf[1] = {((char)(puis / 100 * 127)) & ~(1 << 8)}; // Data to send
 
-  printf("Puissance : %d\n", tx_buf[0]);
+  printf("Puissance : %d\n", tx_buf[0]); // Debug
 
   in->status =
       FT_Write(in->handle, tx_buf, sizeof(tx_buf), &written); // USB Write
@@ -24,5 +24,5 @@ void commande(float puis) {
     perror("FT_Write: Unable to write.\n"); // Failure
   }
 
-  finUSB(in);
+  finUSB(in); // Close USB Connexion
 }

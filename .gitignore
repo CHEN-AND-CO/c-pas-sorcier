@@ -14,5 +14,5 @@ test_simulateur
 .vscode
 *.exe
 sonar-project.properties
-.scannerwork/.sonar_lock
-.scannerwork/report-task.txt
+.scannerwork/
+.sonnarlint/
