@@ -44,7 +44,11 @@ temp_t releve(usb *in) {
       }
     }
 
-    printf("FT_Read success, %ldBytes read", BytesReceived); // Debug
+    #ifdef __linux__
+    printf("FT_Read success, %d Bytes read", BytesReceived); // Debug
+    #else
+    printf("FT_Read success, %ld Bytes read", BytesReceived); // Debug
+    #endif
 
     printf("\nSOText:%d\tSOTint:%d\n", t_ext, t_int);     // Debug
     temperature.exterieure = (float)t_ext * 0.04 - 39.64; // SOT_ext => t_ext
