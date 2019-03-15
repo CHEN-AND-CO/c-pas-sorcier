@@ -36,7 +36,7 @@ float consigne(float csgn)
     {
       fprintf(stderr, "Failed to read on %s !\n", CONSIGNE_PATH); // Read Failed
     }
-    csgn = atof(str_pui);
+    csgn = atof(str_pui); // Convert target temperature string to float
 
     fclose(sum_file_pointer); // Delete file pointer
     fclose(lock);             // Delete file pointer

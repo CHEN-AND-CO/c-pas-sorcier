@@ -14,8 +14,6 @@
 #define PID_OPT_KI 0.175
 #define PID_OPT_KD 0.0005
 
-#define SAMPLE_RATE 10
-
 /* Function for the automatic regulation test */
 float regulationTest(int regul, float csgn, float *tabT, int nT);
 

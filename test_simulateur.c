@@ -3,7 +3,7 @@
 int main()
 {
     temp_t temperature = {16.0, 14.0};
-    int mode_regul = 2; // Mode de régulation
+    int mode_regul = NORMAL_PID; // Mode de régulation
 
     int i = 1;                                         // increment de boucle
     int tab_len = 1;                                   // Nb d'elements de tab_temp
@@ -27,7 +27,7 @@ int main()
         temperature = simCalc(puissance, monSimulateur_ps);                     // simulation de l'environnement
 
         WAIT_MS(100);
-    } while (csgn > 5 && i++); //Tant que la consigne > 5°c on incrémente i
+    } while (csgn > MIN_TARGET && i++); //Tant que la consigne > 5°c on incrémente i
 
     simDestruct(monSimulateur_ps); // Suppression du simulateur
     free(tab_temp);                // Libération du tableau des températures

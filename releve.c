@@ -56,6 +56,7 @@ temp_t releve() {
     printf("\nSOText:%d\tSOTint:%d\n", t_ext, t_int);     // Debug
     temperature.exterieure = (float)t_ext * 0.04 - 39.64; // SOT_ext => t_ext
     temperature.interieure = (float)t_int * 0.04 - 39.64; // SOT_int => t_int
+    printf("Text:%lf\tTint:%lf\n", temperature.exterieure, temperature.interieure);     // Debug
   } else {
     fprintf(stderr, "FT_Read Error \n"); // Read Error
   }

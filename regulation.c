@@ -17,16 +17,16 @@ float regulation(int mode, float target, float temp, float prev_temp)
 {
 	switch (mode)
 	{
-	case 1:  // ToR
-	case 11: // ToR for the regulation automatic Test
+	case NORMAL_TOR:  // ToR
+	case TEST_TOR: // ToR for the regulation automatic Test
 		return (temp < target) ? TOR_FULL_POWER : TOR_LOW_POWER;
 		break;
 
-	case 2: // Optimized PID
+	case NORMAL_PID: // Optimized PID
 		return regulation_pid(target, temp, prev_temp);
 		break;
 
-	case 12: // Normal PID for automatic test
+	case TEST_PID: // Normal PID for automatic test
 		return regulation_pid_test(target, temp, prev_temp);
 		break;
 

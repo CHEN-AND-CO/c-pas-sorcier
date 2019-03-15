@@ -13,6 +13,6 @@ void initUSB(usb *in)
 
 void finUSB(usb *in)
 {
-    FT_Close(in->handle);
-    free(in);
+    FT_Close(in->handle); // Close USB Connexion
+    free(in); // Remove from memory
 }

@@ -24,7 +24,7 @@ void visualisationT(temp_t t)
             fclose(fTemp);
         } 
 
-        fTemp = fopen(DATA_PATH, "r"); // Open the data file
+        fTemp = fopen(DATA_PATH, "w"); // Open the data file
 
         if (!fTemp)
         {
