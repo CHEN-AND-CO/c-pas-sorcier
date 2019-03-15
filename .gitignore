@@ -13,3 +13,5 @@ test_usb
 test_simulateur
 .vscode
 *.exe
+sonar-project.properties
+.scannerwork/.sonar_lock
