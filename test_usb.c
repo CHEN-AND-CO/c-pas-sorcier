@@ -16,16 +16,13 @@ int main()
     int tab_len = 1, regul_mode = 2;
     float *tab_temp = malloc(tab_len * sizeof(float));
 
-    usb *myLittleUsb = malloc(sizeof(usb));
-    initUSB(myLittleUsb);
-
     int i = 1; // increment de boucle
 
     tab_temp[0] = temperature.interieure;
 
     do
     {
-        temperature = releve(myLittleUsb);
+        temperature = releve();
         visualisationT(temperature);
         csgn = consigne(csgn);
 
@@ -35,14 +32,13 @@ int main()
         puissance = regulation(regul_mode, csgn, tab_temp[i - 1], tab_temp[i]);
         visualisationC(puissance);
 
-        commande(myLittleUsb, puissance);
+        commande(puissance);
 
         i++;
         WAIT_MS(70);
     } while (csgn > 5);
 
     free(tab_temp);
-    finUSB(myLittleUsb);
 
     return 0;
 }

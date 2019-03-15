@@ -5,6 +5,6 @@
 #include "usb.h"
 
 /* Get the temperatures from USB */
-temp_t releve(usb *in);
+temp_t releve();
 
 #endif /* RELEVE_H */

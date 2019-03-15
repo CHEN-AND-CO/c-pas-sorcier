@@ -10,19 +10,19 @@ float consigne(float csgn)
   {
     FILE *sum_file_pointer = NULL;
     FILE *lock = fopen(CONSIGNE_LOCK_PATH, "w"); // Create a lock
-    if (access(CONSIGNE_PATH, F_OK) != -1)
-    {                                                // If the consigne file exist
-      sum_file_pointer = fopen(CONSIGNE_PATH, "r+"); // Open
-    }
-    else
-    {
-      sum_file_pointer =
-          fopen(CONSIGNE_PATH, "w+"); // Create and open consigne file
-    }
 
-    if (!sum_file_pointer)
-    { // Check if open is successfull
-      fprintf(stderr, "Failed to open %s !", CONSIGNE_PATH);
+    if (access(CONSIGNE_PATH, F_OK) == -1) {
+      sum_file_pointer = fopen(CONSIGNE_PATH, "w+"); // Create the consigne file
+      fputs("0\n", sum_file_pointer);
+
+      fclose(sum_file_pointer);
+    } 
+
+    sum_file_pointer = fopen(CONSIGNE_PATH, "r"); // Open the consigne file
+
+    if (!sum_file_pointer)  // Check if open is successfull
+    {
+      fprintf(stderr, "Failed to open %s !\n", CONSIGNE_PATH);
 
       free(lock);
       remove(CONSIGNE_LOCK_PATH);
@@ -34,7 +34,7 @@ float consigne(float csgn)
     if (!fgets(str_pui, MAX_BUFFER_SIZE,
                sum_file_pointer))
     {
-      fprintf(stderr, "Failed to read on %s !", CONSIGNE_PATH); // Read Failed
+      fprintf(stderr, "Failed to read on %s !\n", CONSIGNE_PATH); // Read Failed
     }
     csgn = atof(str_pui);
 

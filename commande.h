@@ -5,6 +5,6 @@
 #include "usb.h"
 
 /* Send the power command through USB */
-void commande(usb *usb, float puis);
+void commande(float puis);
 
 #endif /* COMMANDE_H */

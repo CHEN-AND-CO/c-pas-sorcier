@@ -9,17 +9,17 @@ void visualisationC(float puissance_f) {
     FILE *sum_file_pointer = NULL;
 
     if (access(DATA_PATH, F_OK) == -1) {
-      sum_file_pointer = fopen(DATA_PATH, "w+"); // Create the consigne file
+      sum_file_pointer = fopen(DATA_PATH, "w+"); // Create the data file
       fputs("0.0\n0.0\ntrue\n", sum_file_pointer);
 
       fclose(sum_file_pointer);
     } 
 
-    sum_file_pointer = fopen(DATA_PATH, "r+"); // Open the consigne file
+    sum_file_pointer = fopen(DATA_PATH, "r+"); // Open the data file
 
     if (!sum_file_pointer) // Check if we somehow manage to not open it
     {
-      fprintf(stderr, "Failed to open %s !", DATA_PATH);
+      fprintf(stderr, "Failed to open %s !\n", DATA_PATH);
 
       fclose(lock);           // Close the lock access
       remove(DATA_LOCK_PATH); // Remove the lock

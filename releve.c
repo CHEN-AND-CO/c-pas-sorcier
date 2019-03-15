@@ -1,6 +1,9 @@
 #include "releve.h"
 
-temp_t releve(usb *in) {
+temp_t releve() {
+  usb *in = malloc(sizeof(usb));
+  initUSB(in);
+
   temp_t temperature = {-1,
                         -1}; // By default the temperatures will be -1 and -1
   DWORD RxBytes = 6;         // 3 Bytes for t_ext and 3 others for t_int
@@ -56,6 +59,8 @@ temp_t releve(usb *in) {
   } else {
     fprintf(stderr, "FT_Read Error \n"); // Read Error
   }
+
+  finUSB(in);
 
   return temperature;
 }
