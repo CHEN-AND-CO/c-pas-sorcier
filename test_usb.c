@@ -7,6 +7,7 @@
 #include "usb.h"
 #include "releve.h"
 #include "commande.h"
+#include <unistd.h>
 
 int main()
 {
@@ -37,7 +38,7 @@ int main()
         commande(myLittleUsb, puissance);
 
         i++;
-        usleep(70000);
+        WAIT_MS(70);
     } while (csgn > 5);
 
     free(tab_temp);

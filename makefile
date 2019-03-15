@@ -17,8 +17,8 @@ ifeq ($(CC),)									# If no c compiler set
 endif
 
 INCLUDES = -I. -Ilib							# include folders
-CFLAGS = -g -Wall -Wextra -Os -std=c11			# Compiler flags
-LDFLAGS = -lm									# Libs for all systems
+CFLAGS = -g -Wall -Wextra -Os -std=gnu11		# Compiler flags
+LDFLAGS = -lm -ansi								# Libs for all systems
 
 ifeq ($(detected_OS),Windows)
     LDFLAGS += -Llib -l:ftd2xx.lib
