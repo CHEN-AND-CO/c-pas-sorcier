@@ -25,7 +25,7 @@ ifeq ($(detected_OS),Windows)
 	EXTENSION = .exe
 	DELETE_CMD = del
 else
-    LDFLAGS += -lftd2xx
+    LDFLAGS += -Llib -lftd2xx
 	EXTENSION =
 	DELETE_CMD = rm
 endif
