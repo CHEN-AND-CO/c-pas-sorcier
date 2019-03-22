@@ -18,7 +18,7 @@ void visualisationC(float puissance_f) {
     #ifdef __linux__
       sum_file_pointer = fopen(DATA_PATH, "r+"); // Open the data file
     #else
-      sum_file_pointer = fopen(DATA_PATH, "w+"); // Open the data file
+      sum_file_pointer = fopen(DATA_PATH, "r+"); // Open the data file
     #endif
 
     if (!sum_file_pointer) // Check if we somehow manage to not open it
