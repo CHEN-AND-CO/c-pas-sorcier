@@ -27,7 +27,7 @@ void visualisationT(temp_t t)
         #ifdef __linux__
             fTemp = fopen(DATA_PATH, "r+"); // Open the data file
         #else
-            fTemp = fopen(DATA_PATH, "w+"); // Open the data file
+            fTemp = fopen(DATA_PATH, "r+"); // Open the data file
         #endif
 
         if (!fTemp)
